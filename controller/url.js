@@ -49,8 +49,8 @@ async function analytics(req,res){
 
 async function findAll(req,res){
    
-    const URL = await url.find()
-    return res.render('home', {URL:URL})
+    const urls = await url.find()
+    return res.render('home', {urls})
 }
 
 
