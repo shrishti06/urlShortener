@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router();
-const {generateShortURl,redirectURL,analytics} = require('../controller/url')
+const {generateShortURl,redirectURL,analytics,findAll} = require('../controller/url')
 
 router.route('/')
+.get(findAll)
 .post(generateShortURl)
 router.route('/:url')
 .get(redirectURL)

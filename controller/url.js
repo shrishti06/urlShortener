@@ -13,7 +13,8 @@ async function generateShortURl(req,res){
         redirectId: body.url,    
         visitHistory: []
     })
-    return res.status(201).json({id: shortId})
+     res.render('index', {id: shortId})
+   // return res.status(201).json({id: shortId})
 }
 
 async function redirectURL(req,res){
@@ -42,9 +43,17 @@ async function analytics(req,res){
     const URL = await url.findOne( {
         shortId: shortId
     })
-    return res.json({totalClicks: URL.visitHistory.length,analytics: URL.visitHistory})
+    return res.json
+    ({totalClicks: URL.visitHistory.length,analytics: URL.visitHistory})
 }
 
+async function findAll(req,res){
+   
+    const URL = await url.find()
+    return res.render('home', {URL:URL})
+}
+
+
 module.exports={
-    generateShortURl,redirectURL,analytics
+    generateShortURl,redirectURL,analytics,findAll
 }
