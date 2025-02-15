@@ -1,6 +1,4 @@
 *lock.json
 node_modules/
-build/
 logs/
-attachments/
 *.log

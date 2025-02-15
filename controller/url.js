@@ -11,7 +11,8 @@ async function generateShortURl(req,res){
     await url.create( {
         shortId: shortId,
         redirectId: body.url,    
-        visitHistory: []
+        visitHistory: [],
+        createdBy: req.user._id
     })
      res.render('index', {id: shortId})
    // return res.status(201).json({id: shortId})
@@ -31,11 +32,15 @@ async function redirectURL(req,res){
                 timeStamp : Date.now()
         
     },},})
+    console.log(URL.redirectId);
+    
     res.redirect(URL.redirectId)
 }
 
 async function analytics(req,res){
     const shortId= req.params.url;
+    console.log(shortId);
+    
     if(!shortId) {
         return res.status(404).json()
     }
@@ -43,6 +48,8 @@ async function analytics(req,res){
     const URL = await url.findOne( {
         shortId: shortId
     })
+    console.log(URL);
+    
     return res.json
     ({totalClicks: URL.visitHistory.length,analytics: URL.visitHistory})
 }
@@ -50,7 +57,7 @@ async function analytics(req,res){
 async function findAll(req,res){
    
     const urls = await url.find()
-    return res.render('home', {urls})
+    return res.render('index', {urls})
 }
 
 
