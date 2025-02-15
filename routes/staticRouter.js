@@ -3,7 +3,7 @@ const router = express.Router();
 const URL = require('../model/url')
 const {loginUser} = require('../controller/user')
 
-router.route('/url').get(async(req,res)=> {
+router.route('/').get(async(req,res)=> {
     if(!req.user) return res.render("login")
     const urls = await URL.find({createdBy: req.user._id})
     

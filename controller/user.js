@@ -25,10 +25,12 @@ async function loginUser(req,res){
                 error: "User email or password is incorrect"
             })
         }
-        const sessionId = uuidv4();
+        // const sessionId = uuidv4();
         
-        setUser(sessionId,user)
-        res.cookie("uid", sessionId)
+        const token = setUser(user)
+        console.log(user,token);
+        
+        res.cookie("uid", token)
         
         return res.render('index')
     }
